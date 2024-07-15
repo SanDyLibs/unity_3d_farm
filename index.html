@@ -31,6 +31,7 @@
       var loadingBar = document.querySelector("#unity-loading-bar");
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var warningBanner = document.querySelector("#unity-warning");
+      var unityInstance;
 
       // Shows a temporary message banner/ribbon for a few seconds, or
       // a permanent error message on top of the canvas if type=='error'.
@@ -55,6 +56,18 @@
         }
         updateBannerVisibility();
       }
+
+    function SendMessageToUnity(message) {
+        unityInstance.SendMessage('UnityToFlutterObject', 'ReceiveFromFlutter', message);
+    }
+
+    function SendMessageToFlutter(message) {
+        // Assuming flutterApp is the global object for your Flutter web app
+        if (window.flutterApp) {
+            window.flutterApp.messageHandler(message);
+        }
+      }
+    
 
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/3d_virtual_farm.loader.js";
@@ -89,9 +102,10 @@
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
-        createUnityInstance(canvas, config, (progress) => {
+        createUnityInstance(canvas, config, document.querySelector("#unityContainer"), (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
-        }).then((unityInstance) => {
+        }).then((instance) => {
+          unityInstance = instance;
           loadingBar.style.display = "none";
         }).catch((message) => {
           alert(message);
