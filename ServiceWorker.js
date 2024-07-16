@@ -1,9 +1,9 @@
 const cacheName = "DefaultCompany-DC_3D_Farm-0.1";
 const contentToCache = [
-    "Build/3d_virtual_farm.loader.js",
-    "Build/3d_virtual_farm.framework.js",
-    "Build/3d_virtual_farm.data",
-    "Build/3d_virtual_farm.wasm",
+    "Build/webBuild.loader.js",
+    "Build/webBuild.framework.js",
+    "Build/webBuild.data",
+    "Build/webBuild.wasm",
     "TemplateData/style.css"
 
 ];
