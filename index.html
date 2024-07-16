@@ -36,6 +36,7 @@
     var unityInstance;
 
     function SendMessageToUnity(message) {
+      console.log(message);
       unityInstance.SendMessage('UnityToFlutterObject', 'ReceiveFromFlutter', message);
     }
 
